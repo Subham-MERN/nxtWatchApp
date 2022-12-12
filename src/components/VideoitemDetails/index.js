@@ -105,6 +105,10 @@ class VideoitemDetails extends Component {
     this.setState({isDislikeActive: false, isLikeActive: true})
   }
 
+  toggleSave = () => {
+    this.setState(prevState => ({isSaveActive: !prevState.isSaveActive}))
+  }
+
   renderFailureView = () => (
     <ThemeContext.Consumer>
       {value => {
@@ -168,7 +172,7 @@ class VideoitemDetails extends Component {
 
         const toggleButton3 = () => {
           updateSavedList(videosList)
-          updateSavedList({...savedList, videosList})
+          this.toggleSave()
         }
 
         return (
@@ -227,7 +231,7 @@ class VideoitemDetails extends Component {
                             onClick={toggleButton3}
                           >
                             <MdPlaylistAdd />
-                            Save
+                            {isSaveActive ? 'Save' : 'Saved'}
                           </InterfaceButton>
                         </CustomListItem>
                       </ViewsContainer>
